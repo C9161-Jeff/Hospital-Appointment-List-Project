@@ -1,8 +1,12 @@
 import Container from "react-bootstrap/Container";
 import { doctorData } from "../helpers/data";
 import { Col, Image, Row } from "react-bootstrap";
+import AddModal from "./AddModal";
+import { useState } from "react";
 
 const Doctors = () => {
+  const [showModal, setShow] = useState(false);
+
   // console.log(doctorData);
   return (
     <Container>
@@ -20,6 +24,7 @@ const Doctors = () => {
                 className="img-thumbnail doctor-img w-100"
                 src={img}
                 alt={name}
+                onClick={() => setShow(true)}
               />
               <h5>{name}</h5>
               <p>{dep}</p>
@@ -27,6 +32,7 @@ const Doctors = () => {
           );
         })}
       </Row>
+      <AddModal showModal={showModal} handleClose={() => setShow(false)} />
     </Container>
   );
 };
