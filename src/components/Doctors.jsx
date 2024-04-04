@@ -6,6 +6,7 @@ import { useState } from "react";
 
 const Doctors = () => {
   const [showModal, setShow] = useState(false);
+  const [drName, setDrName] = useState("");
 
   // console.log(doctorData);
   return (
@@ -24,7 +25,10 @@ const Doctors = () => {
                 className="img-thumbnail doctor-img w-100"
                 src={img}
                 alt={name}
-                onClick={() => setShow(true)}
+                onClick={() => {
+                  setShow(true);
+                  setDrName(name);
+                }}
               />
               <h5>{name}</h5>
               <p>{dep}</p>
@@ -32,7 +36,11 @@ const Doctors = () => {
           );
         })}
       </Row>
-      <AddModal showModal={showModal} handleClose={() => setShow(false)} />
+      <AddModal
+        showModal={showModal}
+        handleClose={() => setShow(false)}
+        drName={drName}
+      />
     </Container>
   );
 };
