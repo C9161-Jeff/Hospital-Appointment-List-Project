@@ -4,9 +4,12 @@ import { Col, Image, Row } from "react-bootstrap";
 import AddModal from "./AddModal";
 import { useState } from "react";
 
-const Doctors = () => {
+const Doctors = ({ apps, setApps }) => {
   const [showModal, setShow] = useState(false);
   const [drName, setDrName] = useState("");
+  const addAppointment = (newAppo) => {
+    setApps([...apps, newAppo]);
+  };
 
   // console.log(doctorData);
   return (
@@ -40,6 +43,7 @@ const Doctors = () => {
         showModal={showModal}
         handleClose={() => setShow(false)}
         drName={drName}
+        addAppointment={addAppointment}
       />
     </Container>
   );

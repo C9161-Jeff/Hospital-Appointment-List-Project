@@ -3,15 +3,29 @@ import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-function AddModal({ showModal, handleClose, drName }) {
+function AddModal({ showModal, handleClose, drName, addAppointment }) {
   //   const [showModal, setShow] = useState(false);
 
   //   const handleClose = () => setShow(false);
   //   const handleShow = () => setShow(true);
   const [patientName, setPatientName] = useState("");
   const [date, setDate] = useState("");
-  console.log(patientName);
-  console.log(date);
+  // console.log(patientName);
+  // console.log(date);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log(patientName, date, drName);
+
+    addAppointment({
+      // id: new Date().getTime(),
+      id: crypto.randomUUID(),
+      patient: patientName,
+      day: date,
+      consulted: false,
+      doctor: drName,
+    });
+  };
 
   return (
     <>
@@ -20,7 +34,7 @@ function AddModal({ showModal, handleClose, drName }) {
           <Modal.Title>Appointment for : {drName}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Patient Name</Form.Label>
               <Form.Control
