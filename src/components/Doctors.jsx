@@ -3,12 +3,17 @@ import { doctorData } from "../helpers/data";
 import { Col, Image, Row } from "react-bootstrap";
 import AddModal from "./AddModal";
 import { useState } from "react";
+import { addLocal } from "../helpers/utis";
 
 const Doctors = ({ apps, setApps }) => {
   const [showModal, setShow] = useState(false);
   const [drName, setDrName] = useState("");
   const addAppointment = (newAppo) => {
     setApps([...apps, newAppo]);
+    //! localStorage setItem(),getItem(),remove(),clear()
+    //! storage string veri saklar o yuzden donusturme yapmalıyız
+    localStorage.setItem("appointments", JSON.stringify([...apps, newAppo]));
+    addLocal("appointments", newAppo);
   };
 
   // console.log(doctorData);

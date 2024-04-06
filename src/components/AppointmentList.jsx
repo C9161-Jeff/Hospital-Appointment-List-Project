@@ -2,18 +2,29 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { TiDelete, TiTick } from "react-icons/ti";
+import { addLocal } from "../helpers/utis";
 
 const AppointmentList = ({ apps, setApps }) => {
   const handleDelete = (id) => {
     setApps(apps?.filter((appo) => appo.id !== id));
+
+    const newAppo = apps?.filter((appo) => appo.id !== id);
+    setApps(newAppo);
+    localStorage.setItem("appointments", JSON.stringify(newAppo));
+    addLocal("appointments", newAppo);
   };
 
   const handleToggle = (id) => {
-    setApps(
-      apps?.map((appo) =>
-        appo.id === id ? { ...appo, consulted: !appo.consulted } : appo
-      )
-    );
+    // setApps(
+    //   apps?.map((appo) =>
+    //     appo.id === id ? { ...appo, consulted: !appo.consulted } : appo
+    //   )
+    // );
+
+    const newAppo = apps?.filter((appo) => appo.id !== id);
+    setApps(newAppo);
+    localStorage.setItem("appointments", JSON.stringify(newAppo));
+    addLocal("appointments", newAppo);
   };
   return (
     <Container className="p-2">

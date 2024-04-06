@@ -1,10 +1,12 @@
 import { useState } from "react";
 import AppointmentList from "../components/AppointmentList";
 import Doctors from "../components/Doctors";
-import { appointmentData } from "../helpers/data";
+// import { appointmentData } from "../helpers/data";
 
 const Home = () => {
-  const [appointments, setAppointment] = useState(appointmentData);
+  const [appointments, setAppointment] = useState(
+    JSON.parse(localStorage.getItem("appointments")) || []
+  );
 
   console.log(appointments);
   return (
